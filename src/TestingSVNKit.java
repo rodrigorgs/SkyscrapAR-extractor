@@ -95,50 +95,55 @@ public class TestingSVNKit {
 	            }
 	        }catch(Exception e){e.printStackTrace();}
 	        
-            /* 
-             * Bruno
-             * */	        
-	        System.out.println(" ==============================================================");
-	        System.out.println(" ======================== CHANGE COUNT ========================");	
-	        System.out.println(" ==============================================================");
-	        
-			File file = new File("FilesChange.txt");
-			if(file.exists())
-				file.delete();
-			else
-				file.createNewFile();
-			FileWriter output = new FileWriter(file);
+            writeCountToFile(components, "FilesChange.txt");
+	}
+
+	public static void writeCountToFile(HashMap<String, Integer> components, String filename)
+			throws IOException {
+		/* 
+		 * Bruno
+		 * */	        
+		System.out.println(" ==============================================================");
+		System.out.println(" ======================== CHANGE COUNT ========================");	
+		System.out.println(" ==============================================================");
+		
+		File file = new File(filename);
+		if(file.exists())
+			file.delete();
+		else
+			file.createNewFile();
+		FileWriter output = new FileWriter(file);
+		output.write("Package\tFileName\tNumberOfChanges\tFileType\n");
+		
+		Set<String> compsSet = components.keySet();
+		for ( Iterator<String> compsSetIterator = compsSet.iterator( ); compsSetIterator.hasNext( ); ) {
+			String comp = (String)compsSetIterator.next();
+			Integer changeCount = (Integer) components.get(comp);
 			
-	        Set<String> compsSet = components.keySet();
-	        for ( Iterator<String> compsSetIterator = compsSet.iterator( ); compsSetIterator.hasNext( ); ) {
-	        	Integer changeCount = (Integer) components.get(compsSetIterator.next());
-	        	String comp = (String)compsSetIterator.next();
-	        	System.out.println(comp+": "+changeCount);
-	        	
-	        	String packageName = "";
-	        	String javaFileName = "";
-	        	
-	        	String[] compSplit = comp.split(" ");
-	        	packageName = compSplit[0];
-	        	javaFileName = compSplit[1];
-	        	        	
-	        	output.write(packageName+"\t"+javaFileName+"\t"+changeCount+"\t"+"ConcreteClass"+"\n");
-	        	//output.close();
-	        }
+			System.out.println(comp+": "+changeCount);
+			
+			String packageName = "";
+			String javaFileName = "";
+			
+			String[] compSplit = comp.split(" ");
+			packageName = compSplit[0];
+			javaFileName = compSplit[1];
+			        	
+			output.write(packageName+"\t"+javaFileName+"\t"+changeCount+"\t"+"ConcreteClass"+"\n");
+			//output.close();
+		}
 	}
 	
 	//Bruno
-	private static boolean isJavaSourcePath(String path)
+	public static boolean isJavaSourcePath(String path)
 	{
-		if (path.contains("/src/") && path.contains(".java"))
-			return true;
-		return false;
+		return path.contains("src/") && path.endsWith(".java");
 	}
 	
 	//Bruno
-	private static String getJavaFile(String path)
+	public static String getJavaFile(String path)
 	{
-		int index = path.indexOf("/src");
+		int index = path.indexOf("src/");
 		if(index!= -1) //just confirming that we are handling a src path 
 		{	
 			StringTokenizer tokenizer = new StringTokenizer(path,"/");
@@ -148,15 +153,16 @@ public class TestingSVNKit {
 					return token;
 			}
 		}
-		return "";		
+		throw new RuntimeException("Error in getJavaFile");
+//		return "";		
 	}
 	
 	//Bruno
-	private static String getPackageFromPath(String path)
+	public static String getPackageFromPath(String path)
 	{
 		String srcPackagePath = "";
 		String convertedPackagePath = "";
-		int index = path.indexOf("/src");
+		int index = path.indexOf("src/");
 		if(index!= -1) //just confirming that we are handling a src path 
 		{	
 			srcPackagePath = path.substring(index+4);
