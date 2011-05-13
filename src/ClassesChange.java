@@ -1,5 +1,3 @@
-package prefuse.demos;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -74,7 +72,7 @@ public class ClassesChange extends JPanel {
         // load the data
         Table t = null;
         try {
-            t = new DelimitedTextTableReader().readTable("/FilesChange2.txt");
+            t = new DelimitedTextTableReader().readTable("FilesChange2.txt");
         } catch ( Exception e ) {
             e.printStackTrace();
             System.exit(1);
