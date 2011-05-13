@@ -5,29 +5,53 @@ import java.util.regex.Pattern;
 public class ScmFile {
 	private static Pattern CLASSNAME_REGEX = Pattern.compile("src/.*/(.*?)\\.java$");
 	private static Pattern PACKAGE_REGEX = Pattern.compile("src/(.*)/.*?\\.java$");
-	
+	private static Pattern PACKAGE_SRC_REGEX = Pattern.compile("package (.*?);", Pattern.MULTILINE);
+		
 	private String localPath;
 	private String packageName;
 	private String className;
-	private boolean abstractType;
+	private String type;
 	
-	private static String firstGroup(Pattern p, String s) {
+	// TODO: move to a Util class.
+	public static String firstGroup(Pattern p, String s) {
 		Matcher m = p.matcher(s);
-		if (m.matches())
+		if (m.find())
 			return m.group(1);
 		else
 			return null;
 	}
 	
+	// TODO: move to a Util class.
+	public static boolean matches(Pattern p, String s) {
+		Matcher m = p.matcher(s);
+		return m.find();
+	}
+	
 	public static boolean isJavaFile(String path) {
-		return Pattern.matches(CLASSNAME_REGEX.pattern(), path);
+		return matches(CLASSNAME_REGEX, path);
 	}
 	
 	public ScmFile(String path) {
 		this.localPath = path;
-		this.className = firstGroup(CLASSNAME_REGEX, path);
-		this.packageName = firstGroup(PACKAGE_REGEX, path).replace('/', '.');
-		this.abstractType = false;
+	}
+	
+	public void extractInfo(String fileContents) {
+		this.className = firstGroup(CLASSNAME_REGEX, localPath);
+		this.packageName = firstGroup(PACKAGE_REGEX, localPath); //.replace('/', '.');
+		this.type = "ConcreteClass";
+		
+		if (fileContents == null)
+			return;
+		
+		String pkg = ScmFile.firstGroup(PACKAGE_SRC_REGEX, fileContents);
+		packageName = (pkg == null ? "Default-Package" : pkg);
+		
+		Pattern patternAbstract = Pattern.compile("abstract class " + className + "\\b");
+		Pattern patternInterface = Pattern.compile("interface " + className + "\\b");
+		if (matches(patternAbstract, fileContents))
+			type = "AbstractClass";
+		else if (matches(patternInterface, fileContents))
+			type = "Interface";
 	}
 	
 	@Override
@@ -63,7 +87,7 @@ public class ScmFile {
 		return className;
 	}
 
-	public boolean isAbstractType() {
-		return abstractType;
+	public String getType() {
+		return type;
 	}
 }
