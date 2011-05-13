@@ -42,6 +42,7 @@ import prefuse.data.io.DelimitedTextTableReader;
 import prefuse.data.query.ListQueryBinding;
 import prefuse.data.query.RangeQueryBinding;
 import prefuse.data.query.SearchQueryBinding;
+//import prefuse.demos.FilesChange.Counter;
 import prefuse.render.AxisRenderer;
 import prefuse.render.Renderer;
 import prefuse.render.RendererFactory;
@@ -59,10 +60,7 @@ import prefuse.visual.VisualTable;
 import prefuse.visual.expression.VisiblePredicate;
 import prefuse.visual.sort.ItemSorter;
 
-/**
- * @author <a href="http://jheer.org">jeffrey heer</a>
- */
-public class Congress extends JPanel {
+public class ClassesChange extends JPanel {
 
     public static void main(String[] args) {
         UILib.setPlatformLookAndFeel();
@@ -76,37 +74,37 @@ public class Congress extends JPanel {
         // load the data
         Table t = null;
         try {
-            t = new DelimitedTextTableReader().readTable("/fec.txt");
+            t = new DelimitedTextTableReader().readTable("/FilesChange2.txt");
         } catch ( Exception e ) {
             e.printStackTrace();
             System.exit(1);
         }
         
-        JFrame frame = new JFrame((char)0x00a2+" o n g r e s s");
-        frame.setContentPane(new Congress(t));
+        JFrame frame = new JFrame("Change History");
+        frame.setContentPane(new ClassesChange(t));
         frame.pack();
         return frame;
-    }
+    }	
     
     // ------------------------------------------------------------------------
     
-    private static final String TOTAL_RECEIPTS = "Total Receipts";
-    private static final String RECEIPTS = "Total Receipts";
+    private static final String TOTAL_CHANGES = "NumberOfChanges";
+    private static final String CHANGES = "NumberOfChanges";
     
-    private String m_title = (char)0x00a2+"ongress";
+    private String m_title = "Change History";
     private String m_totalStr;
-    private double m_totalMoney = 1000000000;
-    private int m_totalPeople = 10000;
-    private JFastLabel m_total = new JFastLabel(m_totalPeople+" Candidates: "+m_totalMoney);
+    private double m_totalChange = 10000;
+    private int m_totalFiles = 100000;
+    private JFastLabel m_total = new JFastLabel(m_totalFiles+" Files: "+m_totalChange);
     private JFastLabel m_details;
     
     private Visualization m_vis;
     private Display m_display;
     private Rectangle2D m_dataB = new Rectangle2D.Double();
     private Rectangle2D m_xlabB = new Rectangle2D.Double();
-    private Rectangle2D m_ylabB = new Rectangle2D.Double();
-    
-    public Congress(Table t) {
+    private Rectangle2D m_ylabB = new Rectangle2D.Double();    
+	
+    public ClassesChange(Table t) {
         super(new BorderLayout());
         
         // --------------------------------------------------------------------
@@ -115,21 +113,21 @@ public class Congress extends JPanel {
         final Visualization vis = new Visualization();
         m_vis = vis;
         
-        final String group = "by_state";
+        final String group = "by_package";
 
         // filter to show only candidates receiving more than $100,000
         Predicate p = (Predicate)
-            ExpressionParser.parse("["+TOTAL_RECEIPTS+"] >= 100000"); 
+            ExpressionParser.parse("["+TOTAL_CHANGES+"] >= 0"); 
         VisualTable vt = vis.addTable(group, t, p);
         
         // add a new column containing a label string showing
         // candidate name, party, state, year, and total receipts
-        vt.addColumn("label", "CONCAT(CAP(Candidate), ' (', "
-                + "CAP([Party Designation]), '-', [State Code], "
-                + "') ', Year, ': $', FORMAT([Total Receipts],2))");
+        vt.addColumn("label", "CONCAT(FileName, ' (', "
+                + "Package, "
+                + "') ', FileType, ':', NumberOfChanges)");
 
         // add calculation for senators
-        vt.addColumn("Senate", "District <= 0");       
+        //vt.addColumn("Senate", "District <= 0");       
                 
         vis.setRendererFactory(new RendererFactory() {
             AbstractShapeRenderer sr = new ShapeRenderer();
@@ -146,46 +144,53 @@ public class Congress extends JPanel {
         // STEP 2: create actions to process the visual data
 
         // set up dynamic queries, search set
-        RangeQueryBinding  receiptsQ = new RangeQueryBinding(vt, RECEIPTS);
-        ListQueryBinding   yearsQ    = new ListQueryBinding(vt, "Year");
-        SearchQueryBinding searchQ   = new SearchQueryBinding(vt, "Candidate");
+        RangeQueryBinding  receiptsQ = new RangeQueryBinding(vt, CHANGES);
+        ListQueryBinding   filesTypeQ    = new ListQueryBinding(vt, "FileType");
+        SearchQueryBinding searchQ   = new SearchQueryBinding(vt, "FileName");
         
         // construct the filtering predicate
         AndPredicate filter = new AndPredicate(searchQ.getPredicate());
-        filter.add(yearsQ.getPredicate());
+        filter.add(filesTypeQ.getPredicate());
         filter.add(receiptsQ.getPredicate());
         
         // set up the actions
-        AxisLayout xaxis = new AxisLayout(group, "State Code",
+        AxisLayout xaxis = new AxisLayout(group, "Package",
                 Constants.X_AXIS, VisiblePredicate.TRUE); 
-        AxisLayout yaxis = new AxisLayout(group, RECEIPTS,
+        AxisLayout yaxis = new AxisLayout(group, CHANGES,
                 Constants.Y_AXIS, VisiblePredicate.TRUE);
         //yaxis.setScale(Constants.LOG_SCALE);
         yaxis.setRangeModel(receiptsQ.getModel());
-        receiptsQ.getNumberModel().setValueRange(0,65000000,0,65000000);
+        receiptsQ.getNumberModel().setValueRange(0,400,0,400);
         
         xaxis.setLayoutBounds(m_dataB);
         yaxis.setLayoutBounds(m_dataB);
         
         AxisLabelLayout ylabels = new AxisLabelLayout("ylab", yaxis, m_ylabB);
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
+        //NumberFormat nf = NumberFormat.getCurrencyInstance();
+        //nf.setMaximumFractionDigits(0);
+        //ylabels.setNumberFormat(nf);
+        
+        NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(0);
         ylabels.setNumberFormat(nf);
         
         AxisLabelLayout xlabels = new AxisLabelLayout("xlab", xaxis, m_xlabB, 15);
         vis.putAction("xlabels", xlabels);
         
-        // dems = blue, reps = red, other = gray
+        // concrete = blue, abstract = green, other = gray, interface = red
         int[] palette = new int[] {
-            ColorLib.rgb(150,150,255), ColorLib.rgb(255,150,150),
-            ColorLib.rgb(180,180,180)
-        };
-        DataColorAction color = new DataColorAction(group, "Party",
-                Constants.ORDINAL, VisualItem.STROKECOLOR, palette);
+            ColorLib.rgb(20,255,20), ColorLib.rgb(100,100,255),
+            ColorLib.rgb(255,100,100),/*ColorLib.rgb(180,180,180)*/ };
+
+        DataColorAction color = new DataColorAction(group, "FileType",
+                Constants.NOMINAL, VisualItem.STROKECOLOR, palette);
         
+        //Tem que ver o que colocar para ser representado pelos shapes. Por enquanto coloquei
+        //os tipos dos arquivos (classes).
         int[] shapes = new int[]
-            { Constants.SHAPE_RECTANGLE, Constants.SHAPE_DIAMOND };
-        DataShapeAction shape = new DataShapeAction(group, "Senate", shapes);
+            { Constants.SHAPE_RECTANGLE, Constants.SHAPE_DIAMOND, Constants.SHAPE_CROSS,
+        		Constants.SHAPE_STAR};
+        DataShapeAction shape = new DataShapeAction(group, "FileType", shapes);
         
         Counter cntr = new Counter(group);
         
@@ -224,7 +229,7 @@ public class Congress extends JPanel {
             public int score(VisualItem item) {
                 int score = super.score(item);
                 if ( item.isInGroup(group) )
-                    score += item.getInt(TOTAL_RECEIPTS);
+                    score += item.getInt(TOTAL_CHANGES);
                 return score;
             }
         });
@@ -285,7 +290,7 @@ public class Congress extends JPanel {
         
         // set up search box
         JSearchPanel searcher = searchQ.createSearchPanel();
-        searcher.setLabelText("Candidate: ");
+        searcher.setLabelText("File: ");
         searcher.setBorder(BorderFactory.createEmptyBorder(5,5,5,0));
         
         // create dynamic queries
@@ -294,7 +299,7 @@ public class Congress extends JPanel {
         radioBox.add(searcher);
         radioBox.add(Box.createHorizontalGlue());
         radioBox.add(Box.createHorizontalStrut(5));
-        radioBox.add(yearsQ.createRadioGroup());
+        radioBox.add(filesTypeQ.createRadioGroup());
         radioBox.add(Box.createHorizontalStrut(16));
         
         JRangeSlider slider = receiptsQ.createVerticalRangeSlider();
@@ -352,20 +357,20 @@ public class Congress extends JPanel {
             Iterator items = m_vis.visibleItems(m_group);
             while ( items.hasNext() ) {
                 item = (VisualItem)items.next();
-                total += item.getDouble("Total Receipts");
+                total += item.getDouble("NumberOfChanges");
                 ++count;
             }
-            m_totalMoney = total;
-            m_totalPeople = count;
+            m_totalChange = total;
+            m_totalFiles = count;
             
             if ( count == 1 ) {
                 m_totalStr = item.getString("label");
             } else {
-                m_totalStr = count + " Candidates receiving " +
-                    NumberFormat.getCurrencyInstance().format(total);
+                m_totalStr = count + " Files changed " ;
             }
             m_total.setText(m_totalStr);
         }
     }
     
-} // end of class ScatterPlot
+    
+}
