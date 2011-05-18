@@ -1,288 +1,275 @@
-Package	FileName	NumberOfChanges	FileType
-org.junit.tests.assertion	AssertionTest	20	ConcreteClass
-org.junit.experimental.theories.suppliers	TestedOn	1	Interface
-org.junit.internal.builders	NullBuilder	2	ConcreteClass
-org.junit.runner.manipulation	package-info	1	ConcreteClass
-org.junit.rules	MethodRule	2	Interface
-org.junit.matchers	JUnitMatchers	24	ConcreteClass
-org.junit.internal.builders	JUnit3Builder	2	ConcreteClass
-org.junit.tests.experimental	MatcherTest	2	ConcreteClass
-org.junit.rules	Verifier	5	ConcreteClass
-org.junit.internal.matchers	SubstringMatcher	4	AbstractClass
-junit.framework	TestCase	1	AbstractClass
-org.junit.internal.runners	ClassRoadie	2	ConcreteClass
-junit.runner	TestRunListener	1	Interface
-org.junit.experimental.results	FailureList	3	ConcreteClass
-org.junit.internal.runners.statements	RunBefores	4	ConcreteClass
-org.junit.tests.running.classes	ParameterizedTestTest	12	ConcreteClass
-org.junit.internal.runners	SuiteMethod	2	ConcreteClass
-org.junit.experimental.results	ResultMatchers	10	ConcreteClass
-org.junit.tests.experimental	ExperimentalTests	2	ConcreteClass
-junit.tests.framework	TestImplementorTest	1	ConcreteClass
-org.junit.tests	ObjectContractTest	3	ConcreteClass
-org.junit.tests.description	TestDescriptionTest	2	ConcreteClass
-org.junit.tests.experimental.theories.extendingwithstubs	StubbedTheories	10	ConcreteClass
-junit.framework	Protectable	1	Interface
-org.junit.tests.experimental.theories.runner	SuccessfulWithDataPointFields	4	ConcreteClass
-junit.runner	package-info	1	ConcreteClass
-org.junit.rules	ExpectedException	9	ConcreteClass
-org.junit.tests.experimental.max	DescriptionTest	1	ConcreteClass
-org.junit.runners.model	MultipleFailureException	3	ConcreteClass
-junit.samples.money	package-info	1	ConcreteClass
-org.junit.tests.experimental	AssumptionTest	12	ConcreteClass
-org.junit.runner.notification	StoppedByUserException	1	ConcreteClass
-org.junit.tests.assertion	EachTest	5	ConcreteClass
-junit.tests	AllTests	1	ConcreteClass
-junit.tests.framework	AssertTest	3	ConcreteClass
-org.junit.internal.builders	SuiteMethodBuilder	2	ConcreteClass
-org.junit.matchers	package-info	2	ConcreteClass
-org.junit.tests.running.methods	InheritedTestTest	1	ConcreteClass
-org.junit.internal.requests	package-info	1	ConcreteClass
-org.junit.tests.experimental.theories.extendingwithstubs	MethodCall	1	ConcreteClass
-org.junit	Rule	7	Interface
-junit.textui	ResultPrinter	1	ConcreteClass
-org.junit.experimental.theories.internal	AllMembersSupplier	14	ConcreteClass
-org.junit.tests.running.classes	IgnoreClassTest	4	ConcreteClass
-junit.tests.framework	OneTestCase	1	ConcreteClass
-org.junit.experimental.theories	PotentialAssignment	6	AbstractClass
-org.junit.experimental.theories	DataPoints	1	Interface
-org.junit	ClassRule	12	Interface
-junit.tests	WasRun	1	ConcreteClass
-org.junit.experimental.categories	Categories	20	ConcreteClass
-junit.tests.framework	ComparisonFailureTest	2	ConcreteClass
-junit.tests.framework	DoublePrecisionAssertTest	1	ConcreteClass
-org.junit.internal.runners	JUnit38ClassRunner	14	ConcreteClass
-org.junit.tests.junit3compatibility	OldTests	1	ConcreteClass
-org.junit.internal.runners.statements	FailOnTimeout	4	ConcreteClass
-org.junit.runner.manipulation	Sorter	6	ConcreteClass
-org.junit.runner	Describable	3	Interface
-org.junit.experimental.max	MaxCore	39	ConcreteClass
-org.junit.tests.experimental.categories	CategoriesAndParameterizedTest	1	ConcreteClass
-org.junit.tests.junit3compatibility	AllTestsTest	5	ConcreteClass
-junit.runner	BaseTestRunner	2	AbstractClass
-org.junit.tests.experimental.theories.runner	WithExtendedParameterSources	1	ConcreteClass
-junit.runner	Version	53	ConcreteClass
-org.junit.tests.junit3compatibility	ForwardCompatibilityTest	4	ConcreteClass
-org.junit.runner.manipulation	NoTestsRemainException	1	ConcreteClass
-org.junit.tests.deprecated	JUnit4ClassRunnerTest	3	ConcreteClass
-org.junit.experimental.theories	Theories	31	ConcreteClass
-org.junit.tests.description	SuiteDescriptionTest	2	ConcreteClass
-org.junit.experimental.theories	Theory	1	Interface
-org.junit.tests.assertion	MultipleFailureExceptionTest	1	ConcreteClass
-org.junit.internal.runners.model	EachTestNotifier	10	ConcreteClass
-org.junit.tests.experimental.parallel	ParallelMethodTest	10	ConcreteClass
-junit.tests.framework	package-info	1	ConcreteClass
-org.junit.tests.experimental.rules	ClassRulesTest	8	ConcreteClass
-org.junit.tests.manipulation	FilterableTest	5	ConcreteClass
-org.junit.tests.experimental.theories	AllMembersSupplierTest	3	ConcreteClass
-org.junit.runner	package-info	1	ConcreteClass
-org.junit.tests.experimental.rules	MethodRulesTest	4	ConcreteClass
-org.junit.tests.experimental.parallel	ParallelClassTest	12	ConcreteClass
-junit.textui	TestRunner	2	ConcreteClass
-junit.tests.extensions	AllTests	1	ConcreteClass
-junit.tests.framework	NoTestCases	1	ConcreteClass
-org.junit.runners.model	TestClass	15	ConcreteClass
-org.junit.internal.runners	MethodRoadie	2	ConcreteClass
-org.junit.tests.running.classes	ParentRunnerTest	1	ConcreteClass
-org.junit.runner.manipulation	Filterable	1	Interface
-org.junit.tests.running.methods	ParameterizedTestMethodTest	6	ConcreteClass
-junit.extensions	TestSetup	1	ConcreteClass
-org.junit.runner	Result	13	ConcreteClass
-junit.framework	TestResult	1	ConcreteClass
-junit.tests.framework	AllTests	1	ConcreteClass
-junit.tests.runner	package-info	1	ConcreteClass
-org.junit.runners.model	FrameworkMember	4	AbstractClass
-org.junit.tests.experimental.theories.extendingwithstubs	GuesserQueue	3	ConcreteClass
-junit.samples.money	Money	1	ConcreteClass
-org.junit.tests.assertion	BothTest	14	ConcreteClass
-org.junit.tests	package-info	1	ConcreteClass
-org.junit.internal.runners.statements	ExpectException	5	ConcreteClass
-org.junit.internal.runners	TestMethod	2	ConcreteClass
-org.junit.tests.experimental.results	PrintableResultTest	6	ConcreteClass
-junit.tests.framework	ThreeTestCases	3	ConcreteClass
-org.junit.tests.experimental.theories.extendingwithstubs	Stub	1	Interface
-junit.tests.runner	StackFilterTest	1	ConcreteClass
-org.junit.tests.running.classes	SuiteTest	4	ConcreteClass
-org.junit.tests.experimental.theories	ParameterSignatureTest	4	ConcreteClass
-junit.tests.framework	TestListenerTest	1	ConcreteClass
-org.junit.runners.model	RunnerBuilder	3	AbstractClass
-org.junit.runner.notification	Failure	3	ConcreteClass
-junit.framework	package-info	1	ConcreteClass
-org.junit.runners	Suite	46	ConcreteClass
-org.junit.tests.validation	FailedConstructionTest	1	ConcreteClass
-org.junit.tests.experimental.categories	CategoryTest	14	ConcreteClass
-org.junit.internal.builders	AllDefaultPossibilitiesBuilder	4	ConcreteClass
-org.junit.internal	JUnitSystem	1	Interface
-junit.samples	package-info	1	ConcreteClass
-org.junit	package-info	1	ConcreteClass
-org.junit.internal	ComparisonCriteria	8	AbstractClass
-org.junit.tests.description	AnnotatedDescriptionTest	2	ConcreteClass
-org.junit.internal.requests	SortingRequest	1	ConcreteClass
-org.junit.samples	SimpleTest	1	ConcreteClass
-org.junit.internal.requests	ClassRequest	6	ConcreteClass
-junit.extensions	RepeatedTest	1	ConcreteClass
-junit.framework	Test	1	Interface
-org.junit.tests.junit3compatibility	InitializationErrorForwardCompatibilityTest	3	ConcreteClass
-org.junit.rules	Timeout	5	ConcreteClass
-junit.samples	AllTests	1	ConcreteClass
-org.junit.runner	Request	24	AbstractClass
-org.junit.tests.experimental.max	MaxStarterTest	37	ConcreteClass
-org.junit.runner.notification	package-info	1	ConcreteClass
-org.junit.runner	Computer	8	ConcreteClass
-org.junit.internal.matchers	StringContains	4	ConcreteClass
-org.junit.tests.running.methods	TimeoutTest	8	ConcreteClass
-junit.tests.framework	NotVoidTestCase	1	ConcreteClass
-org.junit.tests.running.core	CommandLineTest	1	ConcreteClass
-junit.framework	JUnit4TestAdapterCache	6	ConcreteClass
-junit.tests.runner	TextRunnerSingleMethodTest	1	ConcreteClass
-org.junit.samples	package-info	1	ConcreteClass
-org.junit	Ignore	1	Interface
-org.junit.internal.matchers	CombinableMatcher	4	ConcreteClass
-org.junit.tests.experimental.theories.extendingwithstubs	Guesser	5	ConcreteClass
-org.junit.tests.experimental.theories.extendingwithstubs	ReguessableValue	2	AbstractClass
-org.junit.internal.runners	InitializationError	3	ConcreteClass
-org.junit.experimental.theories	ParametersSuppliedBy	1	Interface
-junit.framework	ComparisonFailure	1	ConcreteClass
-junit.textui	package-info	1	ConcreteClass
-org.junit.tests.running.classes	ParentRunnerFilteringTest	1	ConcreteClass
-org.junit.tests.listening	TextListenerTest	7	ConcreteClass
-junit.samples	SimpleTest	1	ConcreteClass
-org.junit	AfterClass	4	Interface
-junit.tests.framework	NoTestCaseClass	1	ConcreteClass
-org.junit.samples	ListTest	1	ConcreteClass
-org.junit.rules	TemporaryFolder	1	ConcreteClass
-org.junit.tests.experimental.rules	ExternalResourceRuleTest	2	ConcreteClass
-junit.framework	ComparisonCompactor	1	ConcreteClass
-junit.tests.framework	InheritedTestCase	1	ConcreteClass
-org.junit.tests.junit3compatibility	OldTestClassAdaptingListenerTest	3	ConcreteClass
-org.junit.tests.experimental.theories	ParameterizedAssertionErrorTest	8	ConcreteClass
-org.junit.tests.junit3compatibility	SuiteMethodTest	6	ConcreteClass
-org.junit.internal.runners	TestClass	2	ConcreteClass
-org.junit.runners.model	FrameworkMethod	11	ConcreteClass
-junit.framework	TestFailure	1	ConcreteClass
-junit.samples.money	IMoney	1	Interface
-org.junit.runners	Parameterized	33	ConcreteClass
-org.junit.experimental.categories	Category	7	Interface
-junit.tests.framework	NoArgTestCaseTest	1	ConcreteClass
-org.junit.tests.experimental.theories.runner	WithOnlyTestAnnotations	8	ConcreteClass
-org.junit.internal	TextListener	7	ConcreteClass
-org.junit.internal.matchers	Each	4	ConcreteClass
-org.junit.runners	JUnit4	1	ConcreteClass
-org.junit.samples.money	package-info	1	ConcreteClass
-junit.extensions	ActiveTestSuite	1	ConcreteClass
-junit.tests.extensions	package-info	1	ConcreteClass
-org.junit.experimental.theories.internal	Assignments	9	ConcreteClass
-junit.tests	package-info	1	ConcreteClass
-junit.samples.money	MoneyTest	1	ConcreteClass
-org.junit.runner	Description	21	ConcreteClass
-org.junit.runner.manipulation	Sortable	1	Interface
-org.junit.tests.experimental.theories.extendingwithstubs	StringableObject	1	ConcreteClass
-junit.framework	TestSuite	5	ConcreteClass
-junit.framework	JUnit4TestAdapter	9	ConcreteClass
-org.junit.tests.validation	InaccessibleBaseClassTest	4	ConcreteClass
-org.junit.internal	InexactComparisonCriteria	6	ConcreteClass
-org.junit.tests.experimental.max	JUnit38SortingTest	7	ConcreteClass
-org.junit.experimental.results	PrintableResult	8	ConcreteClass
-org.junit.experimental.theories.suppliers	TestedOnSupplier	2	ConcreteClass
-junit.tests.extensions	ActiveTestTest	1	ConcreteClass
-org.junit	ComparisonFailure	2	ConcreteClass
-org.junit.rules	TestWatchman	3	ConcreteClass
-org.junit.internal	AssumptionViolatedException	1	ConcreteClass
-junit.tests.extensions	RepeatedTestTest	1	ConcreteClass
-junit.samples.money	MoneyBag	1	ConcreteClass
-org.junit.internal.builders	IgnoredClassRunner	1	ConcreteClass
-org.junit	Test	1	Interface
-org.junit.tests.experimental.rules	TimeoutRuleTest	4	ConcreteClass
-org.junit.experimental.theories	ParameterSupplier	1	AbstractClass
-org.junit.tests.experimental	AssumptionViolatedExceptionTest	8	ConcreteClass
-org.junit.tests.manipulation	SortableTest	2	ConcreteClass
-org.junit.runners	ParentRunner	42	AbstractClass
-org.junit.internal.runners.model	MultipleFailureException	5	ConcreteClass
-org.junit.tests.running.methods	AnnotationTest	8	ConcreteClass
-org.junit.tests.manipulation	SingleMethodTest	6	ConcreteClass
-org.junit.rules	RunRules	1	ConcreteClass
-org.junit.runner	RunWith	2	Interface
-org.junit.tests	AllTests	51	ConcreteClass
-org.junit.tests.listening	TestListenerTest	4	ConcreteClass
-org.junit.experimental.max	MaxHistory	24	ConcreteClass
-junit.samples	ListTest	1	ConcreteClass
-org.junit	Assert	21	ConcreteClass
-org.junit.internal	RealSystem	1	ConcreteClass
-org.junit.internal.runners	ErrorReportingRunner	15	ConcreteClass
-org.junit.tests.junit3compatibility	ClassRequestTest	3	ConcreteClass
-org.junit.tests.validation	ValidationTest	3	ConcreteClass
-org.junit.tests.running.classes	RunWithTest	1	ConcreteClass
-org.junit.samples.money	MoneyTest	1	ConcreteClass
-junit.framework	JUnit4TestCaseFacade	1	ConcreteClass
-org.junit.tests.listening	UserStopTest	1	ConcreteClass
-org.junit.runners.model	Statement	2	AbstractClass
-org.junit.experimental.theories	ParameterSignature	2	ConcreteClass
-org.junit.internal.runners.statements	RunAfters	7	ConcreteClass
-org.junit.internal.requests	FilterRequest	3	ConcreteClass
-junit.tests.framework	Success	1	ConcreteClass
-org.junit.runner	JUnitCore	18	ConcreteClass
-junit.tests.framework	ComparisonCompactorTest	1	ConcreteClass
-org.junit.runners.model	FrameworkField	10	ConcreteClass
-org.junit.tests.listening	RunnerTest	1	ConcreteClass
-org.junit	Before	2	Interface
-org.junit.internal.runners	JUnit4ClassRunner	13	ConcreteClass
-junit.tests.extensions	ExtensionTest	1	ConcreteClass
-org.junit.rules	TestName	4	ConcreteClass
-org.junit	Assume	12	ConcreteClass
-org.junit.experimental.theories	DataPoint	1	Interface
-org.junit.tests.experimental.theories.runner	UnsuccessfulWithDataPointFields	13	ConcreteClass
-org.junit.runners	AllTests	2	ConcreteClass
-org.junit.tests.experimental.rules	VerifierRuleTest	4	ConcreteClass
-org.junit.experimental	ParallelComputer	16	ConcreteClass
-org.junit.tests.experimental.rules	TempFolderRuleTest	2	ConcreteClass
-org.junit.tests.experimental.theories.runner	WhenNoParametersMatch	13	ConcreteClass
-org.junit	After	1	Interface
-org.junit.runner	Runner	6	AbstractClass
-org.junit.tests.running.methods	TestMethodTest	12	ConcreteClass
-org.junit.runners	package-info	3	ConcreteClass
-org.junit.rules	ErrorCollector	2	ConcreteClass
-org.junit	BeforeClass	1	Interface
-junit.tests.framework	FloatAssertTest	1	ConcreteClass
-org.junit.rules	TestWatcher	5	AbstractClass
-org.junit.tests.validation.anotherpackage	Super	1	ConcreteClass
-org.junit.tests.running.core	JUnitCoreReturnsCorrectExitCodeTest	1	ConcreteClass
-junit.tests.runner	TextFeedbackTest	1	ConcreteClass
-org.junit.internal.matchers	TypeSafeMatcher	4	AbstractClass
-junit.framework	AssertionFailedError	1	ConcreteClass
-junit.framework	TestListener	1	Interface
-org.junit.runner.notification	RunListener	10	ConcreteClass
-org.junit.rules	TestRule	8	Interface
-org.junit.tests.experimental.theories.extendingwithstubs	StubbedTheoriesTest	1	ConcreteClass
-junit.tests.framework	SuiteTest	5	ConcreteClass
-junit.extensions	package-info	1	ConcreteClass
-org.junit.tests.running.classes	EnclosedTest	2	ConcreteClass
-org.junit.internal.runners	MethodValidator	2	ConcreteClass
-org.junit.internal.runners.model	ReflectiveCallable	1	AbstractClass
-junit.tests.runner	TextRunnerTest	1	ConcreteClass
-org.junit.experimental.max	CouldNotReadCoreException	3	ConcreteClass
-org.junit.tests.running.methods	ExpectedTest	1	ConcreteClass
-org.junit.tests.experimental.theories.runner	TheoriesPerformanceTest	3	ConcreteClass
-org.junit.internal.runners	FailedBefore	2	ConcreteClass
-org.junit.internal.runners.statements	InvokeMethod	3	ConcreteClass
-org.junit.tests.experimental.rules	TestRuleTest	7	ConcreteClass
-org.junit.internal	ArrayComparisonFailure	2	ConcreteClass
-junit.tests.runner	BaseTestRunnerTest	2	ConcreteClass
-junit.tests.runner	AllTests	1	ConcreteClass
-org.junit.tests.listening	ListenerTest	1	ConcreteClass
-junit.tests.framework	Failure	1	ConcreteClass
-junit.framework	Assert	5	ConcreteClass
-org.junit.experimental.runners	Enclosed	2	ConcreteClass
-org.junit.internal.runners	package-info	1	ConcreteClass
-org.junit.internal.builders	IgnoredBuilder	2	ConcreteClass
-org.junit.tests.experimental.theories.runner	WithDataPointMethod	10	ConcreteClass
-org.junit.runners	BlockJUnit4ClassRunner	67	ConcreteClass
-org.junit.experimental.theories.internal	ParameterizedAssertionError	2	ConcreteClass
-org.junit.tests.junit3compatibility	JUnit38ClassRunnerTest	2	ConcreteClass
-org.junit.tests.junit3compatibility	ForwardCompatibilityPrintingTest	1	ConcreteClass
-junit.tests.framework	NotPublicTestCase	1	ConcreteClass
-junit.tests.framework	TestCaseTest	1	ConcreteClass
-org.junit.tests.experimental.rules	ExpectedExceptionRuleTest	4	ConcreteClass
-org.junit.internal.matchers	IsCollectionContaining	6	ConcreteClass
-org.junit.tests.experimental.rules	NameRulesTest	3	ConcreteClass
-org.junit.tests.validation	BadlyFormedClassesTest	3	ConcreteClass
-org.junit.internal.builders	Anno
+Package	FileName	NumberOfChanges	FileType	LOC
+org.junit.tests.assertion	AssertionTest	20	ConcreteClass	486
+org.junit.experimental.theories.suppliers	TestedOn	1	Interface	13
+org.junit.internal.builders	NullBuilder	2	ConcreteClass	14
+org.junit.runner.manipulation	package-info	1	ConcreteClass	7
+org.junit.rules	MethodRule	2	Interface	40
+org.junit.matchers	JUnitMatchers	24	ConcreteClass	83
+org.junit.internal.builders	JUnit3Builder	2	ConcreteClass	21
+org.junit.tests.experimental	MatcherTest	2	ConcreteClass	43
+org.junit.rules	Verifier	5	ConcreteClass	45
+org.junit.internal.matchers	SubstringMatcher	4	AbstractClass	28
+junit.framework	TestCase	1	AbstractClass	212
+org.junit.internal.runners	ClassRoadie	2	ConcreteClass	79
+junit.runner	TestRunListener	1	Interface	19
+org.junit.experimental.results	FailureList	3	ConcreteClass	31
+org.junit.internal.runners.statements	RunBefores	4	ConcreteClass	30
+org.junit.tests.running.classes	ParameterizedTestTest	12	ConcreteClass	216
+org.junit.internal.runners	SuiteMethod	2	ConcreteClass	40
+org.junit.experimental.results	ResultMatchers	10	ConcreteClass	70
+org.junit.tests.experimental	ExperimentalTests	2	ConcreteClass	28
+junit.tests.framework	TestImplementorTest	1	ConcreteClass	54
+org.junit.tests	ObjectContractTest	3	ConcreteClass	46
+org.junit.tests.description	TestDescriptionTest	2	ConcreteClass	11
+org.junit.tests.experimental.theories.extendingwithstubs	StubbedTheories	10	ConcreteClass	65
+junit.framework	Protectable	1	Interface	14
+org.junit.tests.experimental.theories.runner	SuccessfulWithDataPointFields	4	ConcreteClass	204
+junit.runner	package-info	1	ConcreteClass	4
+org.junit.rules	ExpectedException	9	ConcreteClass	136
+org.junit.tests.experimental.max	DescriptionTest	1	ConcreteClass	24
+org.junit.runners.model	MultipleFailureException	3	ConcreteClass	60
+junit.samples.money	package-info	1	ConcreteClass	4
+org.junit.tests.experimental	AssumptionTest	12	ConcreteClass	177
+org.junit.runner.notification	StoppedByUserException	1	ConcreteClass	11
+org.junit.tests.assertion	EachTest	5	ConcreteClass	13
+junit.tests	AllTests	1	ConcreteClass	23
+junit.tests.framework	AssertTest	3	ConcreteClass	171
+org.junit.internal.builders	SuiteMethodBuilder	2	ConcreteClass	26
+org.junit.matchers	package-info	2	ConcreteClass	9
+org.junit.tests.running.methods	InheritedTestTest	1	ConcreteClass	31
+org.junit.internal.requests	package-info	1	ConcreteClass	6
+org.junit.tests.experimental.theories.extendingwithstubs	MethodCall	1	ConcreteClass	54
+org.junit	Rule	7	Interface	47
+junit.textui	ResultPrinter	1	ConcreteClass	139
+org.junit.experimental.theories.internal	AllMembersSupplier	14	ConcreteClass	126
+org.junit.tests.running.classes	IgnoreClassTest	4	ConcreteClass	26
+junit.tests.framework	OneTestCase	1	ConcreteClass	15
+org.junit.experimental.theories	PotentialAssignment	6	AbstractClass	31
+org.junit.experimental.theories	DataPoints	1	Interface	9
+org.junit	ClassRule	12	Interface	60
+junit.tests	WasRun	1	ConcreteClass	15
+org.junit.experimental.categories	Categories	20	ConcreteClass	192
+junit.tests.framework	ComparisonFailureTest	2	ConcreteClass	47
+junit.tests.framework	DoublePrecisionAssertTest	1	ConcreteClass	55
+org.junit.internal.runners	JUnit38ClassRunner	14	ConcreteClass	158
+org.junit.tests.junit3compatibility	OldTests	1	ConcreteClass	11
+org.junit.internal.runners.statements	FailOnTimeout	4	ConcreteClass	46
+org.junit.runner.manipulation	Sorter	6	ConcreteClass	46
+org.junit.runner	Describable	3	Interface	12
+org.junit.experimental.max	MaxCore	39	ConcreteClass	169
+org.junit.tests.experimental.categories	CategoriesAndParameterizedTest	1	ConcreteClass	107
+org.junit.tests.junit3compatibility	AllTestsTest	5	ConcreteClass	81
+junit.runner	BaseTestRunner	2	AbstractClass	318
+org.junit.tests.experimental.theories.runner	WithExtendedParameterSources	1	ConcreteClass	146
+junit.runner	Version	53	ConcreteClass	18
+org.junit.tests.junit3compatibility	ForwardCompatibilityTest	4	ConcreteClass	222
+org.junit.runner.manipulation	NoTestsRemainException	1	ConcreteClass	8
+org.junit.tests.deprecated	JUnit4ClassRunnerTest	3	ConcreteClass	54
+org.junit.experimental.theories	Theories	31	ConcreteClass	199
+org.junit.tests.description	SuiteDescriptionTest	2	ConcreteClass	35
+org.junit.experimental.theories	Theory	1	Interface	12
+org.junit.tests.assertion	MultipleFailureExceptionTest	1	ConcreteClass	60
+org.junit.internal.runners.model	EachTestNotifier	10	ConcreteClass	51
+org.junit.tests.experimental.parallel	ParallelMethodTest	10	ConcreteClass	44
+junit.tests.framework	package-info	1	ConcreteClass	4
+org.junit.tests.experimental.rules	ClassRulesTest	8	ConcreteClass	101
+org.junit.tests.manipulation	FilterableTest	5	ConcreteClass	62
+org.junit.tests.experimental.theories	AllMembersSupplierTest	3	ConcreteClass	34
+org.junit.runner	package-info	1	ConcreteClass	6
+org.junit.tests.experimental.rules	MethodRulesTest	4	ConcreteClass	275
+org.junit.tests.experimental.parallel	ParallelClassTest	12	ConcreteClass	54
+junit.textui	TestRunner	2	ConcreteClass	203
+junit.tests.extensions	AllTests	1	ConcreteClass	23
+junit.tests.framework	NoTestCases	1	ConcreteClass	11
+org.junit.runners.model	TestClass	15	ConcreteClass	153
+org.junit.internal.runners	MethodRoadie	2	ConcreteClass	156
+org.junit.tests.running.classes	ParentRunnerTest	1	ConcreteClass	113
+org.junit.runner.manipulation	Filterable	1	Interface	16
+org.junit.tests.running.methods	ParameterizedTestMethodTest	6	ConcreteClass	102
+junit.extensions	TestSetup	1	ConcreteClass	42
+org.junit.runner	Result	13	ConcreteClass	104
+junit.framework	TestResult	1	ConcreteClass	169
+junit.tests.framework	AllTests	1	ConcreteClass	31
+junit.tests.runner	package-info	1	ConcreteClass	4
+org.junit.runners.model	FrameworkMember	4	AbstractClass	20
+org.junit.tests.experimental.theories.extendingwithstubs	GuesserQueue	3	ConcreteClass	57
+junit.samples.money	Money	1	ConcreteClass	78
+org.junit.tests.assertion	BothTest	14	ConcreteClass	71
+org.junit.tests	package-info	1	ConcreteClass	8
+org.junit.internal.runners.statements	ExpectException	5	ConcreteClass	38
+org.junit.internal.runners	TestMethod	2	ConcreteClass	69
+org.junit.tests.experimental.results	PrintableResultTest	6	ConcreteClass	51
+junit.tests.framework	ThreeTestCases	3	ConcreteClass	15
+org.junit.tests.experimental.theories.extendingwithstubs	Stub	1	Interface	8
+junit.tests.runner	StackFilterTest	1	ConcreteClass	46
+org.junit.tests.running.classes	SuiteTest	4	ConcreteClass	167
+org.junit.tests.experimental.theories	ParameterSignatureTest	4	ConcreteClass	57
+junit.tests.framework	TestListenerTest	1	ConcreteClass	72
+org.junit.runners.model	RunnerBuilder	3	AbstractClass	104
+org.junit.runner.notification	Failure	3	ConcreteClass	77
+junit.framework	package-info	1	ConcreteClass	4
+org.junit.runners	Suite	46	ConcreteClass	130
+org.junit.tests.validation	FailedConstructionTest	1	ConcreteClass	28
+org.junit.tests.experimental.categories	CategoryTest	14	ConcreteClass	254
+org.junit.internal.builders	AllDefaultPossibilitiesBuilder	4	ConcreteClass	57
+org.junit.internal	JUnitSystem	1	Interface	8
+junit.samples	package-info	1	ConcreteClass	4
+org.junit	package-info	1	ConcreteClass	8
+org.junit.internal	ComparisonCriteria	8	AbstractClass	76
+org.junit.tests.description	AnnotatedDescriptionTest	2	ConcreteClass	96
+org.junit.internal.requests	SortingRequest	1	ConcreteClass	25
+org.junit.samples	SimpleTest	1	ConcreteClass	39
+org.junit.internal.requests	ClassRequest	6	ConcreteClass	26
+junit.extensions	RepeatedTest	1	ConcreteClass	38
+junit.framework	Test	1	Interface	17
+org.junit.tests.junit3compatibility	InitializationErrorForwardCompatibilityTest	3	ConcreteClass	100
+org.junit.rules	Timeout	5	ConcreteClass	49
+junit.samples	AllTests	1	ConcreteClass	22
+org.junit.runner	Request	24	AbstractClass	161
+org.junit.tests.experimental.max	MaxStarterTest	37	ConcreteClass	293
+org.junit.runner.notification	package-info	1	ConcreteClass	6
+org.junit.runner	Computer	8	ConcreteClass	40
+org.junit.internal.matchers	StringContains	4	ConcreteClass	31
+org.junit.tests.running.methods	TimeoutTest	8	ConcreteClass	170
+junit.tests.framework	NotVoidTestCase	1	ConcreteClass	14
+org.junit.tests.running.core	CommandLineTest	1	ConcreteClass	67
+junit.framework	JUnit4TestAdapterCache	6	ConcreteClass	81
+junit.tests.runner	TextRunnerSingleMethodTest	1	ConcreteClass	39
+org.junit.samples	package-info	1	ConcreteClass	6
+org.junit	Ignore	1	Interface	39
+org.junit.internal.matchers	CombinableMatcher	4	ConcreteClass	34
+org.junit.tests.experimental.theories.extendingwithstubs	Guesser	5	ConcreteClass	122
+org.junit.tests.experimental.theories.extendingwithstubs	ReguessableValue	2	AbstractClass	16
+org.junit.internal.runners	InitializationError	3	ConcreteClass	30
+org.junit.experimental.theories	ParametersSuppliedBy	1	Interface	12
+junit.framework	ComparisonFailure	1	ConcreteClass	52
+junit.textui	package-info	1	ConcreteClass	4
+org.junit.tests.running.classes	ParentRunnerFilteringTest	1	ConcreteClass	135
+org.junit.tests.listening	TextListenerTest	7	ConcreteClass	65
+junit.samples	SimpleTest	1	ConcreteClass	66
+org.junit	AfterClass	4	Interface	41
+junit.tests.framework	NoTestCaseClass	1	ConcreteClass	10
+org.junit.samples	ListTest	1	ConcreteClass	77
+org.junit.rules	TemporaryFolder	1	ConcreteClass	91
+org.junit.tests.experimental.rules	ExternalResourceRuleTest	2	ConcreteClass	37
+junit.framework	ComparisonCompactor	1	ConcreteClass	72
+junit.tests.framework	InheritedTestCase	1	ConcreteClass	9
+org.junit.tests.junit3compatibility	OldTestClassAdaptingListenerTest	3	ConcreteClass	27
+org.junit.tests.experimental.theories	ParameterizedAssertionErrorTest	8	ConcreteClass	75
+org.junit.tests.junit3compatibility	SuiteMethodTest	6	ConcreteClass	123
+org.junit.internal.runners	TestClass	2	ConcreteClass	102
+org.junit.runners.model	FrameworkMethod	11	ConcreteClass	145
+junit.framework	TestFailure	1	ConcreteClass	58
+junit.samples.money	IMoney	1	Interface	45
+org.junit.runners	Parameterized	33	ConcreteClass	162
+org.junit.experimental.categories	Category	7	Interface	43
+junit.tests.framework	NoArgTestCaseTest	1	ConcreteClass	9
+org.junit.tests.experimental.theories.runner	WithOnlyTestAnnotations	8	ConcreteClass	80
+org.junit.internal	TextListener	7	ConcreteClass	98
+org.junit.internal.matchers	Each	4	ConcreteClass	24
+org.junit.runners	JUnit4	1	ConcreteClass	22
+org.junit.samples.money	package-info	1	ConcreteClass	7
+junit.extensions	ActiveTestSuite	1	ConcreteClass	70
+junit.tests.extensions	package-info	1	ConcreteClass	4
+org.junit.experimental.theories.internal	Assignments	9	ConcreteClass	133
+junit.tests	package-info	1	ConcreteClass	4
+junit.samples.money	MoneyTest	1	ConcreteClass	143
+org.junit.runner	Description	21	ConcreteClass	240
+org.junit.runner.manipulation	Sortable	1	Interface	17
+org.junit.tests.experimental.theories.extendingwithstubs	StringableObject	1	ConcreteClass	27
+junit.framework	TestSuite	5	ConcreteClass	307
+junit.framework	JUnit4TestAdapter	9	ConcreteClass	85
+org.junit.tests.validation	InaccessibleBaseClassTest	4	ConcreteClass	13
+org.junit.internal	InexactComparisonCriteria	6	ConcreteClass	19
+org.junit.tests.experimental.max	JUnit38SortingTest	7	ConcreteClass	53
+org.junit.experimental.results	PrintableResult	8	ConcreteClass	63
+org.junit.experimental.theories.suppliers	TestedOnSupplier	2	ConcreteClass	23
+junit.tests.extensions	ActiveTestTest	1	ConcreteClass	64
+org.junit	ComparisonFailure	2	ConcreteClass	138
+org.junit.rules	TestWatchman	3	ConcreteClass	97
+org.junit.internal	AssumptionViolatedException	1	ConcreteClass	40
+junit.tests.extensions	RepeatedTestTest	1	ConcreteClass	63
+junit.samples.money	MoneyBag	1	ConcreteClass	124
+org.junit.internal.builders	IgnoredClassRunner	1	ConcreteClass	26
+org.junit	Test	1	Interface	68
+org.junit.tests.experimental.rules	TimeoutRuleTest	4	ConcreteClass	39
+org.junit.experimental.theories	ParameterSupplier	1	AbstractClass	8
+org.junit.tests.experimental	AssumptionViolatedExceptionTest	8	ConcreteClass	52
+org.junit.tests.manipulation	SortableTest	2	ConcreteClass	149
+org.junit.runners	ParentRunner	42	AbstractClass	391
+org.junit.internal.runners.model	MultipleFailureException	5	ConcreteClass	12
+org.junit.tests.running.methods	AnnotationTest	8	ConcreteClass	520
+org.junit.tests.manipulation	SingleMethodTest	6	ConcreteClass	168
+org.junit.rules	RunRules	1	ConcreteClass	27
+org.junit.runner	RunWith	2	Interface	34
+org.junit.tests	AllTests	51	ConcreteClass	157
+org.junit.tests.listening	TestListenerTest	4	ConcreteClass	63
+org.junit.experimental.max	MaxHistory	24	ConcreteClass	166
+junit.samples	ListTest	1	ConcreteClass	63
+org.junit	Assert	21	ConcreteClass	783
+org.junit.internal	RealSystem	1	ConcreteClass	15
+org.junit.internal.runners	ErrorReportingRunner	15	ConcreteClass	60
+org.junit.tests.junit3compatibility	ClassRequestTest	3	ConcreteClass	19
+org.junit.tests.validation	ValidationTest	3	ConcreteClass	34
+org.junit.tests.running.classes	RunWithTest	1	ConcreteClass	85
+org.junit.samples.money	MoneyTest	1	ConcreteClass	158
+junit.framework	JUnit4TestCaseFacade	1	ConcreteClass	33
+org.junit.tests.listening	UserStopTest	1	ConcreteClass	28
+org.junit.runners.model	Statement	2	AbstractClass	16
+org.junit.experimental.theories	ParameterSignature	2	ConcreteClass	90
+org.junit.internal.runners.statements	RunAfters	7	ConcreteClass	44
+org.junit.internal.requests	FilterRequest	3	ConcreteClass	42
+junit.tests.framework	Success	1	ConcreteClass	17
+org.junit.runner	JUnitCore	18	ConcreteClass	186
+junit.tests.framework	ComparisonCompactorTest	1	ConcreteClass	102
+org.junit.runners.model	FrameworkField	10	ConcreteClass	50
+org.junit.tests.listening	RunnerTest	1	ConcreteClass	69
+org.junit	Before	2	Interface	38
+org.junit.internal.runners	JUnit4ClassRunner	13	ConcreteClass	145
+junit.tests.extensions	ExtensionTest	1	ConcreteClass	98
+org.junit.rules	TestName	4	ConcreteClass	39
+org.junit	Assume	12	ConcreteClass	94
+org.junit.experimental.theories	DataPoint	1	Interface	9
+org.junit.tests.experimental.theories.runner	UnsuccessfulWithDataPointFields	13	ConcreteClass	126
+org.junit.runners	AllTests	2	ConcreteClass	24
+org.junit.tests.experimental.rules	VerifierRuleTest	4	ConcreteClass	125
+org.junit.experimental	ParallelComputer	16	ConcreteClass	78
+org.junit.tests.experimental.rules	TempFolderRuleTest	2	ConcreteClass	71
+org.junit.tests.experimental.theories.runner	WhenNoParametersMatch	13	ConcreteClass	50
+org.junit	After	1	Interface	39
+org.junit.runner	Runner	6	AbstractClass	40
+org.junit.tests.running.methods	TestMethodTest	12	ConcreteClass	147
+org.junit.runners	package-info	3	ConcreteClass	8
+org.junit.rules	ErrorCollector	2	ConcreteClass	76
+org.junit	BeforeClass	1	Interface	35
+junit.tests.framework	FloatAssertTest	1	ConcreteClass	63
+org.junit.rules	TestWatcher	5	AbstractClass	91
+org.junit.tests.validation.anotherpackage	Super	1	ConcreteClass	7
+org.junit.tests.running.core	JUnitCoreReturnsCorrectExitCodeTest	1	ConcreteClass	39
+junit.tests.runner	TextFeedbackTest	1	ConcreteClass	109
+org.junit.internal.matchers	TypeSafeMatcher	4	AbstractClass	60
+junit.framework	AssertionFailedError	1	ConcreteClass	16
+junit.framework	TestListener	1	Interface	23
+org.junit.runner.notification	RunListener	10	ConcreteClass	91
+org.junit.rules	TestRule	8	Interface	54
+org.junit.tests.experimental.theories.extendingwithstubs	StubbedTheoriesTest	1	ConcreteClass	1
+junit.tests.framework	SuiteTest	5	ConcreteClass	105
+junit.extensions	package-info	1	ConcreteClass	4
+org.junit.tests.running.classes	EnclosedTest	2	ConcreteClass	40
+org.junit.internal.runners	MethodValidator	2	ConcreteClass	91
+org.junit.internal.runners.model	ReflectiveCallable	1	AbstractClass	22
+junit.tests.runner	TextRunnerTest	1	ConcreteClass	61
+org.junit.experimental.max	CouldNotReadCoreException	3	ConcreteClass	15
+org.junit.tests.running.methods	ExpectedTest	1	ConcreteClass	58
+org.junit.tests.experimental.theories.runner	TheoriesPerformanceTest	3	ConcreteClass	37
+org.junit.internal.runners	FailedBefore	2	ConcreteClass	14
+org.junit.internal.runners.statements	InvokeMethod	3	ConcreteClass	22
+org.junit.tests.experimental.rules	TestRuleTest	7	ConcreteClass	301
+org.junit.internal	ArrayComparisonFailure	2	ConcreteClass	59
+junit.tests.runner	BaseTestRunnerTest	2	ConcreteClass	53
+junit.tests.runner	AllTests	1	ConcreteClass	30
+org.junit.tests.listening	ListenerTest	1	ConcreteClass	33
+junit.tests.framework	Failure	1	ConcreteClass	14
+junit.framework	Assert	5	ConcreteClass	296
+org.junit.experimental.runners	Enclosed	2	ConcreteClass	31
+org.junit.internal.runners	package-info	1	ConcreteClass	6

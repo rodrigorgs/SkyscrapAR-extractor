@@ -117,14 +117,14 @@ public class GitExtractor {
 		else
 			file.createNewFile();
 		FileWriter output = new FileWriter(file);
-		output.write("Package\tFileName\tNumberOfChanges\tFileType\n");
+		output.write("Package\tFileName\tNumberOfChanges\tFileType\tLOC\n");
 
 		Set<ScmFile> compsSet = components.keySet();
 		for ( Iterator<ScmFile> compsSetIterator = compsSet.iterator( ); compsSetIterator.hasNext( ); ) {
 			ScmFile comp = (ScmFile)compsSetIterator.next();
 			Integer changeCount = (Integer) components.get(comp);
 
-			output.write(comp.getPackageName() + "\t" + comp.getClassName() + "\t" + changeCount + "\t" + comp.getType()+"\n");
+			output.write(comp.getPackageName() + "\t" + comp.getClassName() + "\t" + changeCount + "\t" + comp.getType() + "\t" + comp.getLinesOfCode() + "\n");
 			//output.close();
 		}
 	}

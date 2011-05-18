@@ -11,6 +11,7 @@ public class ScmFile {
 	private String packageName;
 	private String className;
 	private String type;
+	private long linesOfCode;
 	
 	// TODO: move to a Util class.
 	public static String firstGroup(Pattern p, String s) {
@@ -43,6 +44,8 @@ public class ScmFile {
 		if (fileContents == null)
 			return;
 		
+		this.linesOfCode = fileContents.split("\n").length;
+		
 		String pkg = ScmFile.firstGroup(PACKAGE_SRC_REGEX, fileContents);
 		packageName = (pkg == null ? "Default-Package" : pkg);
 		
@@ -73,6 +76,10 @@ public class ScmFile {
 		}
 			
 		return false;
+	}
+	
+	public long getLinesOfCode() {
+		return linesOfCode;
 	}
 	
 	public String getLocalPath() {

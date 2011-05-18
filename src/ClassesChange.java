@@ -26,6 +26,7 @@ import prefuse.action.RepaintAction;
 import prefuse.action.assignment.ColorAction;
 import prefuse.action.assignment.DataColorAction;
 import prefuse.action.assignment.DataShapeAction;
+import prefuse.action.assignment.DataSizeAction;
 import prefuse.action.filter.VisibilityFilter;
 import prefuse.action.layout.AxisLabelLayout;
 import prefuse.action.layout.AxisLayout;
@@ -41,6 +42,7 @@ import prefuse.data.io.DelimitedTextTableReader;
 import prefuse.data.query.ListQueryBinding;
 import prefuse.data.query.RangeQueryBinding;
 import prefuse.data.query.SearchQueryBinding;
+import prefuse.data.util.TableIterator;
 //import prefuse.demos.FilesChange.Counter;
 import prefuse.render.AxisRenderer;
 import prefuse.render.Renderer;
@@ -50,6 +52,7 @@ import prefuse.render.AbstractShapeRenderer;
 import prefuse.util.ColorLib;
 import prefuse.util.FontLib;
 import prefuse.util.UpdateListener;
+import prefuse.util.collections.IntIterator;
 import prefuse.util.ui.JFastLabel;
 import prefuse.util.ui.JRangeSlider;
 import prefuse.util.ui.JSearchPanel;
@@ -103,12 +106,19 @@ public class ClassesChange extends JPanel {
     private Rectangle2D m_xlabB = new Rectangle2D.Double();
     private Rectangle2D m_ylabB = new Rectangle2D.Double();    
 	
+    private boolean USE_LOG_SCALE = false;
+    private int MAX_POINT_SIZE = 50;
+    
     public ClassesChange(Table t) {
         super(new BorderLayout());
         
-//        ColumnMetadata metadata = t.getMetadata(CHANGES);
-//        int maxChanges = metadata.getMaximumRow();
-//        System.out.println("maxChanges = " + maxChanges);
+        int maxChanges = t.getInt(t.getMetadata(CHANGES).getMaximumRow(), CHANGES);
+        System.out.println("maxChanges = " + maxChanges);
+        
+        int maxLoc = t.getInt(t.getMetadata("LOC").getMaximumRow(), "LOC");
+        
+        t.addColumn("PointSize", "1 + " + MAX_POINT_SIZE + "*(LOC / " + maxLoc + ".0)");
+        
         
         // --------------------------------------------------------------------
         // STEP 1: setup the visualized data
@@ -125,9 +135,7 @@ public class ClassesChange extends JPanel {
         
         // add a new column containing a label string showing
         // candidate name, party, state, year, and total receipts
-        vt.addColumn("label", "CONCAT(FileName, ' (', "
-                + "Package, "
-                + "') ', FileType, ':', NumberOfChanges)");
+        vt.addColumn("label", "CONCAT(FileName, ' (', Package, ') ', FileType, ':', NumberOfChanges, ' changes, LOC = ', LOC)");
 
         // add calculation for senators
         //vt.addColumn("Senate", "District <= 0");       
@@ -161,7 +169,7 @@ public class ClassesChange extends JPanel {
                 Constants.X_AXIS, VisiblePredicate.TRUE); 
         AxisLayout yaxis = new AxisLayout(group, CHANGES,
                 Constants.Y_AXIS, VisiblePredicate.TRUE);
-        //yaxis.setScale(Constants.LOG_SCALE);
+//        yaxis.setScale(Constants.LOG_SCALE);
         yaxis.setRangeModel(receiptsQ.getModel());
         
         
@@ -193,13 +201,23 @@ public class ClassesChange extends JPanel {
         //Tem que ver o que colocar para ser representado pelos shapes. Por enquanto coloquei
         //os tipos dos arquivos (classes).
         int[] shapes = new int[]
-            { Constants.SHAPE_RECTANGLE, Constants.SHAPE_DIAMOND, Constants.SHAPE_CROSS,
-        		Constants.SHAPE_STAR};
+//            { Constants.SHAPE_RECTANGLE, Constants.SHAPE_DIAMOND, Constants.SHAPE_CROSS,
+//        		Constants.SHAPE_STAR};
+              { Constants.SHAPE_ELLIPSE, Constants.SHAPE_ELLIPSE, Constants.SHAPE_ELLIPSE,
+        		Constants.SHAPE_ELLIPSE};
+
         DataShapeAction shape = new DataShapeAction(group, "FileType", shapes);
+        
+        // size
+        DataSizeAction size = new DataSizeAction(group, "PointSize");
+//        size.setMaximumSize(20);
+        if (USE_LOG_SCALE)
+        	size.setScale(Constants.LOG_SCALE);
         
         Counter cntr = new Counter(group);
         
         ActionList draw = new ActionList();
+        draw.add(size);
         draw.add(cntr);
         draw.add(color);
         draw.add(shape);
