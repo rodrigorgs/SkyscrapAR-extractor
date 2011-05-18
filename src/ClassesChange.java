@@ -268,9 +268,11 @@ public class ClassesChange extends JPanel {
         
         m_details = new JFastLabel(m_title);
         m_details.setPreferredSize(new Dimension(75,20));
+//        m_details.setMinimumSize(new Dimension(75, 20));
         m_details.setVerticalAlignment(SwingConstants.BOTTOM);
         
-        m_total.setPreferredSize(new Dimension(500,20));
+        m_total.setMinimumSize(new Dimension(50, 20));
+        m_total.setPreferredSize(new Dimension(700,20));
         m_total.setHorizontalAlignment(SwingConstants.RIGHT);
         m_total.setVerticalAlignment(SwingConstants.BOTTOM);
         
@@ -303,9 +305,16 @@ public class ClassesChange extends JPanel {
         this.addComponentListener(lstnr);
         
         // details
+        
+//        JPanel infoBox = new JPanel();
+//        infoBox.setLayout(new BorderLayout());
+//        infoBox.add(m_details, BorderLayout.WEST);
+//        infoBox.add(m_total, BorderLayout.CENTER);
+//        BorderLayout infoBox = new BorderLayout();
+//        infoBox.set
         Box infoBox = new Box(BoxLayout.X_AXIS);
         infoBox.add(Box.createHorizontalStrut(5));
-        infoBox.add(m_details);
+//        infoBox.add(m_details);
         infoBox.add(Box.createHorizontalGlue());
         infoBox.add(Box.createHorizontalStrut(5));
         infoBox.add(m_total);
@@ -343,7 +352,7 @@ public class ClassesChange extends JPanel {
         
         add(infoBox, BorderLayout.NORTH);
         add(m_display, BorderLayout.CENTER);
-        add(slider, BorderLayout.EAST);
+//        add(slider, BorderLayout.EAST);
         add(radioBox, BorderLayout.SOUTH);
         UILib.setColor(this, ColorLib.getColor(255,255,255), Color.GRAY);
         slider.setForeground(Color.LIGHT_GRAY);
