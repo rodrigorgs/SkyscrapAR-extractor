@@ -9,13 +9,19 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
 import java.util.Iterator;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import prefuse.Constants;
 import prefuse.Display;
@@ -105,11 +111,35 @@ public class ClassesChange extends JPanel {
     private Rectangle2D m_dataB = new Rectangle2D.Double();
     private Rectangle2D m_xlabB = new Rectangle2D.Double();
     private Rectangle2D m_ylabB = new Rectangle2D.Double();    
-	
+    
     private boolean USE_LOG_SCALE = false;
     private int MAX_POINT_SIZE = 50;
+    private int maxPkgLevel = 1;
     
-    public ClassesChange(Table t) {
+    public void setPackageLevel(Table t, int level) {
+    	IntIterator iter = t.rows();
+    	while (iter.hasNext()) {
+    		int index = iter.nextInt();
+    		String pkg = t.getString(index, "Package");
+    		
+    		StringTokenizer st = new StringTokenizer(pkg, ".");
+    		int contPkgLevel = 0;
+    		String pkgCluster = "";
+
+    		while(st.hasMoreTokens() && contPkgLevel < level)
+    		{
+    			String token = st.nextToken();
+    			pkgCluster += token;
+    			contPkgLevel++;
+    			if (st.hasMoreTokens() && contPkgLevel < level)
+    				pkgCluster += ".";
+    		}
+    		t.setString(index, "PackageCluster", pkgCluster);
+    	}
+    	
+    }
+    
+    public ClassesChange(final Table t) {
         super(new BorderLayout());
         
         int maxChanges = t.getInt(t.getMetadata(CHANGES).getMaximumRow(), CHANGES);
@@ -117,8 +147,18 @@ public class ClassesChange extends JPanel {
         
         int maxLoc = t.getInt(t.getMetadata("LOC").getMaximumRow(), "LOC");
         
+    	IntIterator iter = t.rows();
+    	while (iter.hasNext()) {
+    		int index = iter.nextInt();
+    		String pkg = t.getString(index, "Package");
+    		int pkgLevel = pkg.split("\\.").length;
+    		if (pkgLevel > maxPkgLevel)
+    			maxPkgLevel = pkgLevel;
+    	}
+    		
         t.addColumn("PointSize", "1 + " + MAX_POINT_SIZE + "*(LOC / " + maxLoc + ".0)");
-        
+        t.addColumn("PackageCluster", String.class);
+        setPackageLevel(t, 2);
         
         // --------------------------------------------------------------------
         // STEP 1: setup the visualized data
@@ -165,7 +205,7 @@ public class ClassesChange extends JPanel {
         filter.add(receiptsQ.getPredicate());
         
         // set up the actions
-        AxisLayout xaxis = new AxisLayout(group, "Package",
+        AxisLayout xaxis = new AxisLayout(group, "PackageCluster",
                 Constants.X_AXIS, VisiblePredicate.TRUE); 
         AxisLayout yaxis = new AxisLayout(group, CHANGES,
                 Constants.Y_AXIS, VisiblePredicate.TRUE);
@@ -325,27 +365,33 @@ public class ClassesChange extends JPanel {
         searcher.setLabelText("File: ");
         searcher.setBorder(BorderFactory.createEmptyBorder(5,5,5,0));
         
+        int initialLevel = 3;
+        setPackageLevel(t, initialLevel);
+        final JSlider slider = new JSlider(1, maxPkgLevel, initialLevel);
+        slider.setMajorTickSpacing(1);
+        slider.setSnapToTicks(true);
+        slider.setPaintTicks(true);
+        slider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent event) {
+				setPackageLevel(t, slider.getValue());
+				displayLayout();
+//				System.out.println(slider.getValue());
+			}
+		});
+        
         // create dynamic queries
         Box radioBox = new Box(BoxLayout.X_AXIS);
         radioBox.add(Box.createHorizontalStrut(5));
         radioBox.add(searcher);
         radioBox.add(Box.createHorizontalGlue());
         radioBox.add(Box.createHorizontalStrut(5));
+        radioBox.add(new JLabel("Level:"));
+        radioBox.add(slider);
+        radioBox.add(Box.createHorizontalStrut(5));
+        radioBox.add(Box.createHorizontalGlue());
         radioBox.add(filesTypeQ.createRadioGroup());
         radioBox.add(Box.createHorizontalStrut(16));
-        
-        JRangeSlider slider = receiptsQ.createVerticalRangeSlider();
-        slider.setThumbColor(null);
-        slider.setMinExtent(150000);
-        slider.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                m_display.setHighQuality(false);
-            }
-            public void mouseReleased(MouseEvent e) {
-                m_display.setHighQuality(true);
-                m_display.repaint();
-            }
-        });
         
         vis.run("draw");
         vis.run("xlabels");
