@@ -33,6 +33,7 @@ import prefuse.controls.Control;
 import prefuse.controls.ControlAdapter;
 import prefuse.controls.ToolTipControl;
 import prefuse.data.Table;
+import prefuse.data.column.ColumnMetadata;
 import prefuse.data.expression.AndPredicate;
 import prefuse.data.expression.Predicate;
 import prefuse.data.expression.parser.ExpressionParser;
@@ -105,6 +106,10 @@ public class ClassesChange extends JPanel {
     public ClassesChange(Table t) {
         super(new BorderLayout());
         
+//        ColumnMetadata metadata = t.getMetadata(CHANGES);
+//        int maxChanges = metadata.getMaximumRow();
+//        System.out.println("maxChanges = " + maxChanges);
+        
         // --------------------------------------------------------------------
         // STEP 1: setup the visualized data
         
@@ -158,7 +163,9 @@ public class ClassesChange extends JPanel {
                 Constants.Y_AXIS, VisiblePredicate.TRUE);
         //yaxis.setScale(Constants.LOG_SCALE);
         yaxis.setRangeModel(receiptsQ.getModel());
-        receiptsQ.getNumberModel().setValueRange(0,400,0,400);
+        
+        
+        //receiptsQ.getNumberModel().setValueRange(0,maxChanges*1.1,0,maxChanges*1.1);
         
         xaxis.setLayoutBounds(m_dataB);
         yaxis.setLayoutBounds(m_dataB);
