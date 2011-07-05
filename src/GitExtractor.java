@@ -14,23 +14,30 @@ import java.util.Set;
 
 import edu.nyu.cs.javagit.api.DotGit;
 import edu.nyu.cs.javagit.api.JavaGitException;
+import edu.nyu.cs.javagit.api.Ref;
 import edu.nyu.cs.javagit.api.WorkingTree;
+import edu.nyu.cs.javagit.api.commands.GitCheckout;
+import edu.nyu.cs.javagit.api.commands.GitCheckoutResponse;
 import edu.nyu.cs.javagit.api.commands.GitLogOptions;
+import edu.nyu.cs.javagit.api.commands.GitLogResponse.Commit;
 import edu.nyu.cs.javagit.api.commands.GitLogResponse.CommitFile;
 
 
 public class GitExtractor {
 	static String REPO_PATH = "git-repos/";
 	
-	public static void incrementComponentCount(HashMap<ScmFile, Integer>components, String path) {
+	public static ScmFile incrementComponentCount(HashMap<ScmFile, Integer>components, String path) {
     	ScmFile scmFile = new ScmFile(path);
     	
     	Integer changeCount = new Integer(0);
-    	if (components.containsKey(scmFile))
+    	if (components.containsKey(scmFile)) {
     		changeCount = (Integer) components.get(scmFile);
+    	}
     	
     	changeCount++;
     	components.put(scmFile, changeCount);
+    	
+    	return scmFile;
 	}
 	
 	// based on http://wiki.eclipse.org/JGit/User_Guide
@@ -44,8 +51,21 @@ public class GitExtractor {
 		GitLogOptions options = new GitLogOptions();
 		options.setOptFileDetails(true);
 		
-		for (edu.nyu.cs.javagit.api.commands.GitLogResponse.Commit commit : dotGit.getLog(options)) {
+		
+		////////////////////////////////////
+		File repoPathDot = new File(REPO_PATH + "/.");
+		List<File> repoPathDotList = new ArrayList<File>();
+		repoPathDotList.add(repoPathDot);
+		GitCheckout checkout = new GitCheckout();
+		List<Commit> gitlog = dotGit.getLog(options);
+		int version = 1;
+		for (edu.nyu.cs.javagit.api.commands.GitLogResponse.Commit commit : gitlog) {
 			System.out.println("Commit with " + commit.getFilesChanged() + " changes.");
+			String hash = commit.getSha();
+			Ref ref = Ref.createSha1Ref(hash);
+			System.out.println("HASH = " + hash);
+						
+			GitCheckoutResponse response = checkout.checkout(repositoryDirectory, ref, repoPathDotList);
 			
 			List<CommitFile> files = commit.getFiles();
 			if (files == null || files.size() == 0)
@@ -57,9 +77,22 @@ public class GitExtractor {
 				String path = file.getName();
 				
                 if (ScmFile.isJavaFile(path)){
-                	incrementComponentCount(components, path);
+                	ScmFile scmFile = new ScmFile(path);
+                	
+        			File aafile = new File(REPO_PATH + "/" + scmFile.getLocalPath());
+        			String contents = null;
+        			if (aafile.exists()) {
+	    				contents = readFile(aafile);
+	        			scmFile.extractInfo(contents);
+	
+	                	
+	                	
+	//    				System.out.println("Path = " + path);
+	    				System.out.println("v" + version + ": " + scmFile.getPackageName() + "." + scmFile.getClassName() + " LOC =  " + scmFile.getLinesOfCode());
+        			}
                 }
 			}
+			version++;
 		}
 		
 		System.out.println(components.keySet().size() + " files analyzed.");
