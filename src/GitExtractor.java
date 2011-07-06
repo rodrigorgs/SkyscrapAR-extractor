@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.jdom.Element;
+
 import edu.nyu.cs.javagit.api.DotGit;
 import edu.nyu.cs.javagit.api.JavaGitException;
 import edu.nyu.cs.javagit.api.Ref;
@@ -25,6 +27,7 @@ import edu.nyu.cs.javagit.api.commands.GitLogResponse.CommitFile;
 
 public class GitExtractor {
 	static String REPO_PATH = "git-repos/";
+	//static String REPO_PATH = "D:/junit/junit/";
 	
 	public static ScmFile incrementComponentCount(HashMap<ScmFile, Integer>components, String path) {
     	ScmFile scmFile = new ScmFile(path);
@@ -40,68 +43,7 @@ public class GitExtractor {
     	return scmFile;
 	}
 	
-	// based on http://wiki.eclipse.org/JGit/User_Guide
-	public static void main(String[] args) throws IOException, JavaGitException {
-		HashMap<ScmFile, Integer> components = new HashMap<ScmFile, Integer>();
-
-		File repositoryDirectory = new File(REPO_PATH);
 		
-		DotGit dotGit = DotGit.getInstance(repositoryDirectory);
-//		WorkingTree tree = dotGit.getWorkingTree();
-		GitLogOptions options = new GitLogOptions();
-		options.setOptFileDetails(true);
-		
-		
-		////////////////////////////////////
-		File repoPathDot = new File(REPO_PATH + "/.");
-		List<File> repoPathDotList = new ArrayList<File>();
-		repoPathDotList.add(repoPathDot);
-		GitCheckout checkout = new GitCheckout();
-		List<Commit> gitlog = dotGit.getLog(options);
-		int version = 1;
-		for (edu.nyu.cs.javagit.api.commands.GitLogResponse.Commit commit : gitlog) {
-			System.out.println("Commit with " + commit.getFilesChanged() + " changes.");
-			String hash = commit.getSha();
-			Ref ref = Ref.createSha1Ref(hash);
-			System.out.println("HASH = " + hash);
-						
-			GitCheckoutResponse response = checkout.checkout(repositoryDirectory, ref, repoPathDotList);
-			
-			List<CommitFile> files = commit.getFiles();
-			if (files == null || files.size() == 0)
-				continue;
-			
-//			String sha = commit.getSha();
-			
-			for (CommitFile file : files) {				
-				String path = file.getName();
-				
-                if (ScmFile.isJavaFile(path)){
-                	ScmFile scmFile = new ScmFile(path);
-                	
-        			File aafile = new File(REPO_PATH + "/" + scmFile.getLocalPath());
-        			String contents = null;
-        			if (aafile.exists()) {
-	    				contents = readFile(aafile);
-	        			scmFile.extractInfo(contents);
-	
-	                	
-	                	
-	//    				System.out.println("Path = " + path);
-	    				System.out.println("v" + version + ": " + scmFile.getPackageName() + "." + scmFile.getClassName() + " LOC =  " + scmFile.getLinesOfCode());
-        			}
-                }
-			}
-			version++;
-		}
-		
-		System.out.println(components.keySet().size() + " files analyzed.");
-		
-		addInfoToFiles(components);
-		
-		writeCountToFile(components, "FilesChange2.txt");
-	}
-	
 	private static void addInfoToFiles(HashMap<ScmFile, Integer>components) throws IOException {
 		System.out.println("computing info...");
 		
@@ -161,4 +103,91 @@ public class GitExtractor {
 			//output.close();
 		}
 	}
+	
+	// based on http://wiki.eclipse.org/JGit/User_Guide
+	public static void main(String[] args) throws IOException, JavaGitException {
+		
+		SCMtoXML scmXml;
+		
+		HashMap<ScmFile, Integer> components = new HashMap<ScmFile, Integer>();
+
+		File repositoryDirectory = new File(REPO_PATH);
+		
+		DotGit dotGit = DotGit.getInstance(repositoryDirectory);
+//		WorkingTree tree = dotGit.getWorkingTree();
+		GitLogOptions options = new GitLogOptions();
+		options.setOptFileDetails(true);
+		
+		
+		////////////////////////////////////
+		File repoPathDot = new File(REPO_PATH + "/.");
+		List<File> repoPathDotList = new ArrayList<File>();
+		repoPathDotList.add(repoPathDot);
+		GitCheckout checkout = new GitCheckout();
+		List<Commit> gitlog = dotGit.getLog(options);
+		int version = 1; //count the number of versions at least one java file was modified
+		boolean javaFileChanged = false;
+		scmXml = new SCMtoXML("JUnit", gitlog.size()); //TODO: a user interface to choose the project name or get it automatically from Git 
+		
+		try{
+			for (edu.nyu.cs.javagit.api.commands.GitLogResponse.Commit commit : gitlog) {
+				System.out.println("Commit with " + commit.getFilesChanged() + " changes.");
+				//System.out.println("     Msg: "+commit.getMessage());
+				String hash = commit.getSha();
+				Ref ref = Ref.createSha1Ref(hash);
+							
+				GitCheckoutResponse response = checkout.checkout(repositoryDirectory, ref, repoPathDotList);
+				
+				List<CommitFile> files = commit.getFiles();
+				if (files == null || files.size() == 0)
+					continue;
+				
+				for (CommitFile file : files) {				
+					String path = file.getName();
+					
+	                if (ScmFile.isJavaFile(path)){
+	                	ScmFile scmFile = new ScmFile(path);
+	                	
+	        			File aafile = new File(REPO_PATH + "/" + scmFile.getLocalPath());
+	        			String contents = null;
+	        			if (aafile.exists()) {
+	        				javaFileChanged = true;
+		    				contents = readFile(aafile);
+		        			scmFile.extractInfo(contents);
+		    				System.out.println("v" + version + ": " + scmFile.getPackageName() + "." + scmFile.getClassName() + " LOC =  " + scmFile.getLinesOfCode());
+		    				
+		    				Element packageElement = scmXml.addPackage(scmFile.getPackageName());
+	    					Element classElement = scmXml.addClassToPackage(packageElement, scmFile.getClassName(), scmFile.getType());
+	    					if (classElement!=null)
+	    							scmXml.addVersionToClass(classElement, version, scmFile.getLinesOfCode());
+	    					else
+	    						throw new Exception("Error when adding class to package. Class with name "+scmFile.getClassName()+" already exists in the package.");
+	    					scmXml.generateVersionsNotChanged(version);
+	        			}
+	                }
+				}
+				if(javaFileChanged)
+				{
+					version++;
+					javaFileChanged = false;
+					//Warning: This version counting is only for our internal purpose. This is not git version counting.
+					//This counting only considers the java file modifications in the commits.
+					//When a commit is done without modifying at least one java file, the version counting is not considered.
+				}
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally
+		{
+			scmXml.writeToFile();
+		}
+
+		System.out.println(components.keySet().size() + " files analyzed.");
+		
+		addInfoToFiles(components);
+		
+		writeCountToFile(components, "FilesChange2.txt");
+	}
+	
 }
