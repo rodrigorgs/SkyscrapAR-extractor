@@ -51,20 +51,28 @@ public class SCMtoXML {
 
 	public Element addClassToPackage(Element existingPackage, String className, String classType)
 	{
-		if( (existingPackage!=null) && (existingPackage.getName().equals("package")) && (hasChildElement(existingPackage, className)==null) )
-		{
-			Element newClass = new Element("class");
-			newClass.setAttribute("name", className);
-			newClass.setAttribute("type", classType); 
-			newClass.setAttribute("maxLoc", "0");
-			existingPackage.addContent(newClass);			
-			return newClass;
-		}
-		return null;
+	    if (existingPackage == null || !existingPackage.getName().equals("package"))
+	        return null;
+
+      Element child = hasChildElement(existingPackage, className);
+      if(child == null)
+      {
+        child = new Element("class");
+        child.setAttribute("name", className);
+        child.setAttribute("type", classType);
+        child.setAttribute("maxLoc", "0");
+        existingPackage.addContent(child);
+      }
+      return child;
 	}
 	
 	public boolean addVersionToClass(Element existingClass, long version, long loc) throws Exception
 	{
+		if (existingClass == null) {
+			System.err.println("existingClass is null");
+			return false;
+		}
+		
 		if(existingClass!=null && existingClass.getName().equals("class"))
 		{
 			Element newVersion = new Element("version");

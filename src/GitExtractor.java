@@ -158,11 +158,7 @@ public class GitExtractor {
 		    				
 		    				Element packageElement = scmXml.addPackage(scmFile.getPackageName());
 	    					Element classElement = scmXml.addClassToPackage(packageElement, scmFile.getClassName(), scmFile.getType());
-	    					if (classElement!=null)
-	    							scmXml.addVersionToClass(classElement, version, scmFile.getLinesOfCode());
-	    					else
-	    						throw new Exception("Error when adding class to package. Class with name "+scmFile.getClassName()+" already exists in the package.");
-	    					scmXml.generateVersionsNotChanged(version);
+							scmXml.addVersionToClass(classElement, version, scmFile.getLinesOfCode());
 	        			}
 	                }
 				}
@@ -180,8 +176,9 @@ public class GitExtractor {
 			e.printStackTrace();
 		}finally
 		{
-			scmXml.writeToFile();
+			
 		}
+		scmXml.writeToFile();
 
 		System.out.println(components.keySet().size() + " files analyzed.");
 		
