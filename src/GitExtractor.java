@@ -179,7 +179,7 @@ public class GitExtractor {
 		{
 			
 		}
-		scmXml.setProjectLastVersion(version-1);
+		scmXml.setProjectLastVersion(version);
 		scmXml.writeToFile();
 
 		System.out.println(components.keySet().size() + " files analyzed.");
