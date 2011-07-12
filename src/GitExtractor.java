@@ -127,7 +127,7 @@ public class GitExtractor {
 		List<Commit> gitlog = dotGit.getLog(options);
 		int version = 1; //count the number of versions at least one java file was modified
 		boolean javaFileChanged = false;
-		scmXml = new SCMtoXML("JUnit", gitlog.size()); //TODO: a user interface to choose the project name or get it automatically from Git 
+		scmXml = new SCMtoXML("JUnit"); //TODO: a user interface to choose the project name or get it automatically from Git 
 		
 		try{
 			for (edu.nyu.cs.javagit.api.commands.GitLogResponse.Commit commit : gitlog) {
@@ -179,6 +179,7 @@ public class GitExtractor {
 		{
 			
 		}
+		scmXml.setProjectLastVersion(version-1);
 		scmXml.writeToFile();
 
 		System.out.println(components.keySet().size() + " files analyzed.");

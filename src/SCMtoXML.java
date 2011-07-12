@@ -14,16 +14,15 @@ public class SCMtoXML {
 	private Element codeInfoElement;
 	private Element logInfoElement;
 	
-	public SCMtoXML(String projectName, int lastVersion)
+	public SCMtoXML(String projectName)
 	{
-		this.createXMLDocument(projectName, lastVersion);
+		this.createXMLDocument(projectName);
 	}	
 	
-	private void createXMLDocument(String projectName, int lastVersion)
+	private void createXMLDocument(String projectName)
 	{	
 		Element rootElement = new Element("Project");
 		rootElement.setAttribute(new Attribute("name", projectName));
-		rootElement.setAttribute(new Attribute("lastVersion", lastVersion+""));
 		//
 		codeInfoElement = new Element("CodeInfo");
 		logInfoElement = new Element("LogInfo");
@@ -31,6 +30,12 @@ public class SCMtoXML {
 		rootElement.addContent(logInfoElement);
 		//
 		xmlDoc = new Document(rootElement);
+	}
+	
+	public void setProjectLastVersion(long lastVersion)
+	{
+		Element rootElement = xmlDoc.getRootElement();
+		rootElement.setAttribute("lastVersion", lastVersion+"");
 	}
 	
 	public Element addPackage(String packagePath)
@@ -220,7 +225,7 @@ public class SCMtoXML {
 		try {
 		    XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		    //outputter.output(xmlDoc, System.out);
-		    FileWriter writer = new FileWriter("SCMtoXML.xml");
+		    FileWriter writer = new FileWriter("SCMtoXML2.xml");
 		    outputter.output(xmlDoc, writer);
 		    writer.close();
 		} catch (java.io.IOException e) {
