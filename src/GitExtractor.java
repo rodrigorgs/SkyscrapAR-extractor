@@ -164,6 +164,7 @@ public class GitExtractor {
 				}
 				if(javaFileChanged)
 				{
+					scmXml.addLog(version, hash, commit.getAuthor(), commit.getDateString(), commit.getMessage());					
 					version++;
 					javaFileChanged = false;
 					//Warning: This version counting is only for our internal purpose. This is not git version counting.

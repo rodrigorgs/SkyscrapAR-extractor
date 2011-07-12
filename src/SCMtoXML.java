@@ -11,6 +11,8 @@ import org.jdom.output.XMLOutputter;
 public class SCMtoXML {
 	
 	private Document xmlDoc;
+	private Element codeInfoElement;
+	private Element logInfoElement;
 	
 	public SCMtoXML(String projectName, int lastVersion)
 	{
@@ -22,12 +24,18 @@ public class SCMtoXML {
 		Element rootElement = new Element("Project");
 		rootElement.setAttribute(new Attribute("name", projectName));
 		rootElement.setAttribute(new Attribute("lastVersion", lastVersion+""));
+		//
+		codeInfoElement = new Element("CodeInfo");
+		logInfoElement = new Element("LogInfo");
+		rootElement.addContent(codeInfoElement);
+		rootElement.addContent(logInfoElement);
+		//
 		xmlDoc = new Document(rootElement);
 	}
 	
 	public Element addPackage(String packagePath)
 	{		
-		Element element = xmlDoc.getRootElement();
+		Element element = codeInfoElement;
 		StringTokenizer st = new StringTokenizer(packagePath, ".");
 		//System.out.println("package path: "+packagePath);
 		while(st.hasMoreTokens())
@@ -149,52 +157,63 @@ public class SCMtoXML {
 		return null;
 	}
 	
-	public void generateVersionsNotChanged(long currentVersion)
+	public void addLog(long version, String sha, String author, String date, String msg)
 	{
-		Element rootElement = xmlDoc.getRootElement();
-		List<Element> topLevelPackages = rootElement.getChildren(); 
-		for(Element p: topLevelPackages)
-		{
-			List<Element> children = p.getChildren();
-			for(Element c: children)
-			{
-				if (c.getName().equals("class"))
-					generateVersionNotChangedInClass(c, currentVersion);
-				else if (c.getName().equals("package"))
-					generateVersionsNotChanged(c, currentVersion);
-			}
-		}
+		Element newVersionLog = new Element("versionLog");
+		newVersionLog.setAttribute("num", version+"");
+		newVersionLog.setAttribute("sha", sha);
+		newVersionLog.setAttribute("author", author);
+		newVersionLog.setAttribute("date", date);
+		newVersionLog.setAttribute("msg", msg);
+		logInfoElement.addContent(newVersionLog);
 	}
 	
-	private void generateVersionsNotChanged(Element packageElement, long currentVersion)
-	{
-		List<Element> children = packageElement.getChildren(); 
-		for(Element c: children)
-		{
-			if (c.getName().equals("class"))
-				generateVersionNotChangedInClass(c, currentVersion);
-			else if (c.getName().equals("package"))
-				generateVersionsNotChanged(c, currentVersion);
-		}
-	}
+//	public void generateVersionsNotChanged(long currentVersion)
+//	{
+//		Element rootElement = xmlDoc.getRootElement();
+//		List<Element> topLevelPackages = rootElement.getChildren(); 
+//		for(Element p: topLevelPackages)
+//		{
+//			List<Element> children = p.getChildren();
+//			for(Element c: children)
+//			{
+//				if (c.getName().equals("class"))
+//					generateVersionNotChangedInClass(c, currentVersion);
+//				else if (c.getName().equals("package"))
+//					generateVersionsNotChanged(c, currentVersion);
+//			}
+//		}
+//	}
 	
-	private void generateVersionNotChangedInClass(Element classElement, long version)
-	{
-		List<Element> versions = classElement.getChildren();
-		for(Element v: versions)
-		{
-			long version_of_v = Long.valueOf(v.getAttributeValue("num")).longValue();
-			if(version > version_of_v)
-			{
-				Element versionNotChanged = new Element("version");
-				versionNotChanged.setAttribute("num", version+"");
-				versionNotChanged.setAttribute("curr_loc", v.getAttributeValue("curr_loc"));
-				versionNotChanged.setAttribute("changed", "0");
-				versionNotChanged.setAttribute("churn", v.getAttributeValue("churn"));
-				classElement.addContent(versionNotChanged);
-			}
-		}
-	}
+//	private void generateVersionsNotChanged(Element packageElement, long currentVersion)
+//	{
+//		List<Element> children = packageElement.getChildren(); 
+//		for(Element c: children)
+//		{
+//			if (c.getName().equals("class"))
+//				generateVersionNotChangedInClass(c, currentVersion);
+//			else if (c.getName().equals("package"))
+//				generateVersionsNotChanged(c, currentVersion);
+//		}
+//	}
+	
+//	private void generateVersionNotChangedInClass(Element classElement, long version)
+//	{
+//		List<Element> versions = classElement.getChildren();
+//		for(Element v: versions)
+//		{
+//			long version_of_v = Long.valueOf(v.getAttributeValue("num")).longValue();
+//			if(version > version_of_v)
+//			{
+//				Element versionNotChanged = new Element("version");
+//				versionNotChanged.setAttribute("num", version+"");
+//				versionNotChanged.setAttribute("curr_loc", v.getAttributeValue("curr_loc"));
+//				versionNotChanged.setAttribute("changed", "0");
+//				versionNotChanged.setAttribute("churn", v.getAttributeValue("churn"));
+//				classElement.addContent(versionNotChanged);
+//			}
+//		}
+//	}
 	
 	public void writeToFile()
 	{
