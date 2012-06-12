@@ -1,4 +1,7 @@
-Source code extractor for [SkyscrapAR].
+SkyscrapAR-extractor
+====================
+
+Source code extractor for [SkyscrapAR]. Extracts information from git repositories.
 
 Run
 
