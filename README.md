@@ -19,3 +19,8 @@ It will generate the file SCMtoXML2.xml. Use it as input to [SkyscrapAR].
 
 
 [SkyscrapAR]: https://github.com/rodrigorgs/SkyscrapAR
+
+Dependencies
+============
+
+For your convenience, the `lib` folder with the dependencies is available at http://app.dcc.ufba.br/~rodrigo/SkyscrapAR-extractor-lib.zip
